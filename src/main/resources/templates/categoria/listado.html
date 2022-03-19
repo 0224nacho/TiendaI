@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>TechShop</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="/CSS/Menu.css" rel="stylesheet" type="text/css"/>
+    </head>
+    <body>
+        <header th:replace="plantilla/plantilla :: header" />
+        <div class="contenido">
+        <h2>Gestion de categorias</h2>
+        
+        <a th:href="@{/categoria/nuevo}">Nuevo categoria</a>
+        <div th:if="${categorias != null and !categorias.empty}">
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellidos</th>
+                        <th>Correo</th>
+                        <th>Telefono</th>
+                        <th>Modificar</th>
+                        <th>Eliminar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="categoria : ${categorias}">
+                        <td th:text="${categoria.nombre}"></td>
+                        <td th:text="${categoria.apellidos}"></td>
+                        <td th:text="${categoria.correo}"></td>
+                        <td th:text="${categoria.telefono}"></td>
+                        <td><a th:href="@{/categoria/modificar}+${categoria.idCliente}">Modificar</a></td>
+                        <td><a th:href="@{/categoria/eliminar}+${categoria.idCliente}">Eliminar</a></td>
+                    </tr>
+                </tbody>
+            </table> 
+        </div>
+        <div th:if="${categorias == null or categorias.empty}">
+            No existe una lista para mostrar
+        </div>
+        </div>
+        <footer th:replace="plantilla/plantilla :: footer" />
+    </body>
+</html>
