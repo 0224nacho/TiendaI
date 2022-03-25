@@ -20,11 +20,8 @@ public class ClienteController {
     
      @GetMapping("/cliente/listado")
     public String inicio(Model model) {
-
-        var clientes = clienteService.getClientes(true);
-
+        var clientes = clienteService.getClientes();
         model.addAttribute("clientes", clientes);
-
         return "/cliente/listado";
     }
 

@@ -1,8 +1,8 @@
 package com.tiendaI.controller;
 
-import com.tiendaI.dao.ArticuloDao;
-import com.tiendaI.model.Articulo;
-import com.tiendaI.service.ArticuloService;
+import com.tiendaI.dao.CategoriaDao;
+import com.tiendaI.model.Categoria;
+import com.tiendaI.service.CategoriaService;
 import java.util.Arrays;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,33 +16,41 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class CategoriaController {
 
     @Autowired
-    private ArticuloService articuloService;
+    private CategoriaService categoriaService;
+    
+    
+    @GetMapping("/categoria/listado")
+    public String inicio (Model model){
+        var categorias = categoriaService.getCategorias(false);
+        model.addAttribute("categorias",categorias);
+        return "/categoria/listado";
+    }
 
 
-    @GetMapping("/articulo/nuevo")
-    public String nuevoArticulo(Articulo articulo) {
+    @GetMapping("/categoria/nuevo")
+    public String nuevoCategoria(Categoria categoria) {
 
-        return "/articulo/modificar";
+        return "/categoria/modificar";
     }
     
     
-    @PostMapping("/articulo/guardar")
-    public String guardarArticulo(Articulo articulo){
-        articuloService.save(articulo);
-        return "redirect:/articulo/listado";
+    @PostMapping("/categoria/guardar")
+    public String guardarCategoria(Categoria categoria){
+        categoriaService.save(categoria);
+        return "redirect:/categoria/listado";
     }
     
-    @GetMapping("/articulo/modificar/{idArticulo}")
-    public String modificarArticulo(Articulo articulo, Model model) {
-    articulo = articuloService.getArticulo(articulo);
-    model.addAttribute("articulo",articulo);
-    return "/articulo/modificar";
+    @GetMapping("/categoria/modificar/{idCategoria}")
+    public String modificarCategoria(Categoria categoria, Model model) {
+    categoria = categoriaService.getCategoria(categoria);
+    model.addAttribute("categoria",categoria);
+    return "/categoria/modificar";
 }
     
-        @GetMapping("/articulo/eliminar/{idArticulo}")
-    public String eliminarArticulo(Articulo articulo, Model model) {
-     articuloService.delete(articulo);
-    return "redirect:/articulo/listado";
+        @GetMapping("/categoria/eliminar/{idCategoria}")
+    public String eliminarCategoria(Categoria categoria, Model model) {
+     categoriaService.delete(categoria);
+    return "redirect:/categoria/listado";
 
 }
     

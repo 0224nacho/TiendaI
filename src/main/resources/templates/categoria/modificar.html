@@ -8,27 +8,27 @@
     </head>
     <body>
         <div class="contenido">
-        <h1>Datos de clientes</h1>
-        <a th:href="@{/cliente/listado}">Regresar</a>
+        <h1 th:text="#{categoria.titulo}">Datos de categorias</h1>
+        <a th:href="@{/categoria/listado}" th:text="#{accion.regresar}">Regresar</a>
         <form method="post"
-              th:action="@{/cliente/guardar}"
-              th:object="${cliente}">
+              th:action="@{/categoria/guardar}"
+              th:object="${categoria}">
             <input type="hidden" name="idCategoria" th:field="*{idCategoria}"/>
-            <label  for="descripcion">Descripcion: </label>
+            <label  for="descripcion" th:text="#{categoria.descripcion}">Descripcion: </label>
             <input type="text" name="descripcion" th:field="*{descripcion}">
                 <br>
-                <label  for="activo">Activo: </label>
+                <label  for="activo" th:text="#{categoria.activo}">Activo: </label>
                 <input type="checkbox" name="activo" th:field="*{activo}"/>
                     <br>
                     <br>
-                        <input type="submit" name="guardar" value="Guardar"/>
+                        <button type="submit" name="guardar" th:text="#{accion.guardar}"/>
 
 
 
         </form>
         
         </div>
-        <footer th:replace="layout/plantilla :: footer" />
+        <footer th:replace="plantilla/plantilla :: footer" />
 
 
 
